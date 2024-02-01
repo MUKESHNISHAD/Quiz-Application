@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Radio Input Example</title>
+</head>
+<body>
+
+  <form>
+    <label></label>
+      <input type="radio" name="gender" value="male" onclick="toggleRadio(this)">
+      Male
+    </label>
+
+    <label>
+      <input type="radio" name="gender" value="female" onclick="toggleRadio(this)">
+      Female
+    </label>
+
+    <label>
+      <input type="radio" name="gender" value="other" onclick="toggleRadio(this)">
+      Other
+    </label>
+
+    <!-- Additional fields of data -->
+    <label for="age">Age:</label>
+    <input type="text" id="age" name="age">
+
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city">
+
+    <!-- Submit button -->
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    function toggleRadio(radio) {
+      // Toggle the checked state of the radio button
+      radio.checked = !radio.checked;
+    }
+  </script>
+
+</body>
+</html>

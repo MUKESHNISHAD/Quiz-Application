@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(204, 222, 222);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: rgb(234, 222, 229);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input {
+            width: 80%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #Container {
+            margin-bottom: 20px;
+            height: 100%;
+            overflow: auto;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .View_Area {
+            height: 100%;
+            margin-left: 20%;
+            margin-right: 20%;
+            width: 70%;
+            background-color: rgb(240, 244, 245);
+            font-family: cursive;
+        }
+
+        .header {
+            background-color: #2196F3;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+            top: 0px;
+            height: 20px;
+            margin-bottom: 10px;
+        }
+
+        #option-1,
+        #option-2 {
+            margin-top: 10px;
+            margin-left: 1%;
+            width: 36%;
+            border-radius: 10%;
+            background-color: #319ef8;
+            color: white;
+        }
+
+        #option-3,
+        #option-4 {
+            margin-top: 10px;
+            margin-left: 1%;
+            width: 36%;
+            border-radius: 10%;
+            background-color: #319ef8;
+            color: white;
+        }
+
+        .Quesion_container {
+            border: 2px solid black;
+            margin-top: 10px;
+            margin-left: 10%;
+            margin-right: 10%;
+            background-color: rgb(56, 237, 222);
+            border-radius: 10%;
+        }
+
+        .Question_No {
+            margin-left: 2%;
+            margin-top: 2%;
+            text-decoration: dotted;
+        }
+
+        .quesions_field,
+        .mark_field {
+            margin-left: 10px;
+            margin-right: 10px;
+            color: black;
+        }
+
+        label {
+            border-radius: 10%;
+            border-color: #333;
+        }
+
+        .option_label {
+            height: 40%;
+            width: 30%;
+            border: 4px solid black;
+            margin-left: 30%;
+            border-radius: 30px;
+            background-color: #2196F3;
+        }
+
+        .title_count {
+            width: 20%;
+            margin-top: 1%;
+            font-family: cursive;
+            text-align: center;
+            border-radius: 20%;
+        }
+
+        hr {
+            border: 0;
+            height: 2px;
+            background-color: #060606;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="View_Area">
+        <div class="header"> Quize View </div>
+        <input type="text" id="tittle" value="Your Quiz View_Area" disabled>
+        <form action="sumitpage" method="post">
+            <div id="Container">
+                <!-- quiz Data -->
+            </div>
+            <button type="submit" id="submit">submit</button>
+        </form>
+    </div>
+</body>
+<script>
+    function AddQuesion(question, marks, index, option1, option2, option3, option4, title) {
+        var _quiz = document.getElementById('Container');
+        var data = document.createElement('div');
+        data.className = 'Quesion_container';
+        data.innerHTML = `
+        <label> <center> <input type="text" class="title_count" value=${title} disabled> </center></label><hr>
+        <label for="Quesion" class='Question_No'>${index}. <b>Quesion Name </b></label><br>
+        <input type="text" class="quesions_field" value=${question} disabled>
+        <input type="number" class="mark_field" value=${marks} disabled>
+        
+        <label class="option_label"><input id="option-1" option="A${index}" type="radio"  value="${option1}" class='Tick'>${option1}</label>
+        <label class="option_label"><input id="option-2" option="B${index}" type="radio"  value=${option2} class='Tick'>${option2}</label>
+        <label class="option_label"><input id="option-3" option="C${index}" type="radio"  value=${option3} class='Tick'>${option3}</label>
+        <label class="option_label"><input id="option-4" option="D${index}" type="radio"  value=${option4} class='Tick'>${option4}</label>
+    `;
+        _quiz.appendChild(data);
+    }
+
+    fetch('http://localhost:3000/getData')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            var quesion_no = 1;
+            var title_count = 0;
+            var data_Quesion_count = 1;
+            var count = 0;
+            for (let i = 0; i < data.length; i++, quesion_no++) {
+                // JSON.stringify()
+                data_Quesion_count = data[i].Quesion_Number;
+                if (data_Quesion_count > count) {
+                    AddQuesion(JSON.stringify(data[i].quesion), JSON.stringify(data[i].mark), quesion_no,
+                        JSON.stringify(data[i].option[0]),
+                        JSON.stringify(data[i].option[1]),
+                        JSON.stringify(data[i].option[2]),
+                        JSON.stringify(data[i].option[3]),
+                        JSON.stringify(data[i].tittle)
+                    );
+                    count = data_Quesion_count;
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    // Radio Button Data Handling
+    var UserAnwer = [];
+
+    document.getElementById('Container').addEventListener('click', (evt) => {
+        if (evt.target.className == 'Tick')
+            setOption(evt.target);
+    }, false);
+
+    function setOption(ele) {
+        var parent = ele.parentElement.parentElement;
+        var allRadio = document.getElementsByClassName('Tick');
+        for (let i = 0; i < allRadio.length; i++) {
+            if (allRadio[i].parentElement.parentElement == parent && allRadio[i] != ele) {
+                allRadio[i].checked = false;
+            }
+        }
+    }
+
+    document.getElementById('submit').addEventListener('click', (evt) => {
+        submitAns();
+    })
+
+    function submitAns() {
+        let Ticks = document.getElementsByClassName('Tick');
+        let len = Ticks.length;
+        UserAnwer = [];
+        for (let i = 0; i < len; i++) {
+            if (Ticks[i].checked) {
+                UserAnwer.push(Ticks[i].getAttribute('option'));
+            }
+        }
+        console.log(UserAnwer);
+        fetch('/UserAnswer', {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(UserAnwer)
+        }).then(res => {
+            return res.text();
+        }).then(text => {
+            console.log(text);
+        });
+    }
+</script>
+
+</html>

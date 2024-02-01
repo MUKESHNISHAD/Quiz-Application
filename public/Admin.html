@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(204, 222, 222);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: rgb(247, 236, 242);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input {
+            width: 80%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #Container {
+            margin-bottom: 20px;
+            height: 100%;
+            overflow: auto;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .View_Area {
+            height: 100%;
+            margin-left: 20%;
+            margin-right: 20%;
+            background-color: rgb(240, 244, 245);
+            font-family: cursive;
+        }
+
+        .header {
+            background-color: #2196F3;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+            top: 0px;
+            height: 20px;
+            margin-bottom: 10px;
+        }
+
+        #option-1,
+        #option-2 {
+            margin-top: 10px;
+            margin-left: 1%;
+            width: 36%;
+            border-radius: 10%;
+            background-color: #319ef8;
+            color: white;
+        }
+
+        #option-3,
+        #option-4 {
+            margin-top: 10px;
+            margin-left: 1%;
+            width: 36%;
+            border-radius: 10%;
+            background-color: #319ef8;
+            color: white;
+        }
+
+        .Quesion_container {
+            border: 2px solid black;
+            margin-top: 10px;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .Question_No {
+            margin-left: 2%;
+            margin-top: 2%;
+            text-decoration: dotted;
+        }
+
+        .quesions_field,
+        .mark_field {
+            margin-left: 10px;
+            margin-right: 10px;
+            color: black;
+
+        }
+
+        input:hover {
+            cursor: no-drop;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="View_Area">
+        <div class="header"> Quize View </div>
+        <input type="text" id="tittle" value="Your Quiz View_Area" disabled>
+        <form action="">
+            <div id="Container">
+                <!-- quiz Data -->
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+
+
+    function AddQuesion(question, marks, index, option1, option2, option3, option4, title) {
+        var _quiz = document.getElementById('Container');
+        var data = document.createElement('div');
+        data.className = 'Quesion_container';
+        data.innerHTML = `
+        <input type="text" class="title_count" value=${title} disabled>
+        <label for="Quesion" class='Question_No'>${index}. <b>Quesion Name </b></label><br>
+        <input type="text" class="quesions_field" value=${question} disabled>
+        <input type="number" class="mark_field" value=${marks} disabled>
+        
+        <input id="option-1" type="text"  value=${option1} disabled>
+        <input id="option-2" type="text"  value=${option2} disabled>
+        <input id="option-3" type="text"  value=${option3} disabled>
+        <input id="option-4" type="text"  value=${option4} disabled>
+    `;
+        _quiz.appendChild(data);
+    }
+
+    fetch('http://localhost:3000/getData')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            var quesion_no = 1;
+            var title_count = 0;
+            for (let i = 0; i < data.length; i++, quesion_no++) {
+                // JSON.stringify()
+                AddQuesion(JSON.stringify(data[i].quesion), JSON.stringify(data[i].mark), quesion_no,
+                    JSON.stringify(data[i].option[0]),
+                    JSON.stringify(data[i].option[1]),
+                    JSON.stringify(data[i].option[2]),
+                    JSON.stringify(data[i].option[3]),
+                    JSON.stringify(data[i].tittle)
+                );
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+
+</script>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+    <link rel="stylesheet" href="Edit.css">
+</head>
+
+<body>
+    <div class="View_Area">
+        <div class="header"> Quize View </div>
+        <input type="text" id="tittle" value="Edit Wala Page" disabled>
+        <form action="/submitpage" method="post">
+            <input type="text" id="title" class="title_count" >
+
+            <div id="Container">
+                <!-- quiz Data -->
+            </div>
+            <button id="save" type="submit">Save</button>
+        </form>
+    </div>
+</body>
+<script>
+    document.getElementById('save').addEventListener('click',()=>{
+        alert('Saving');
+        save();
+        console.log("Saving Function");
+    })
+    var  Quesion_Number;
+    var Update_Data = [];
+    function save() {
+        console.log('Saved :');
+        const Data = [];
+        const urlParams = new URLSearchParams(window.location.search);
+        // Data.push({ tittle: document.getElementById('tittle').value, Quesions:Quesion_Number });
+        for (let i = 1; i <=Number_Of_Quesion; i++) {
+
+            const question = document.getElementById(`quesion${i}`).value;
+            const mark = document.getElementById(`mark${i}`).value;
+            const option1 = document.getElementById(`A${i}`).value;
+            const option2 = document.getElementById(`B${i}`).value;
+            const option3 = document.getElementById(`C${i}`).value;
+            const option4 = document.getElementById(`D${i}`).value;
+            const Answer = document.getElementById(`ANSWER${i}`).value; 
+
+            Data.push({
+                q_id: urlParams.get('q_index'),
+                tittle: document.getElementById('title').value,
+                quesion: question,
+                mark: mark,
+                option: [option1, option2, option3, option4],
+                Ans: Answer,
+                Quesion_Number: i
+            });
+        }
+        console.log("Saving :", Data);
+
+        // Send data to the server using fetch
+        fetch('http://localhost:3000/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Data)
+        })
+            .then(response => response.text())
+            .then(message => {
+                console.log(message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function AddQuesion(question, marks, index, option1, option2, option3, option4, title,Quesion_Number,Answer,q_id) {
+        var _quiz = document.getElementById('Container');
+        var data = document.createElement('div');
+        data.className = 'Quesion_container';
+        data.innerHTML = `
+        <div id="${q_id}">
+        <label for="Quesion" class='Question_No'>${index} <b>Quesion Name </b></label><br>
+        <input type="text" id="quesion${Quesion_Number}" class="quesions_field" value=${question} >
+        <input type="number" id="mark${Quesion_Number}" class="mark_field" value=${marks} >
+
+        <input id="A${Quesion_Number}" type="text"  value=${option1} >
+        <input id="B${Quesion_Number}" type="text"  value=${option2} >
+        <input id="C${Quesion_Number}" type="text"  value=${option3} >
+        <input id="D${Quesion_Number}" type="text"  value=${option4} >
+        <input id="ANSWER${Quesion_Number}" type="text"  value=${Answer} >
+    </div>
+    `;
+        _quiz.appendChild(data);
+    }
+   var Number_Of_Quesion;
+    fetch('http://localhost:3000/getData')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            var quesion_no = 1;
+            var title_count = 0;
+            var Quesion_Number=1;
+            Number_Of_Quesion = data.length;
+            document.getElementById('title').value = data[0].tittle;
+            for (let i = 0; i < data.length; i++, quesion_no++,Quesion_Number++) {
+                // JSON.stringify()
+                AddQuesion(JSON.stringify(data[i].quesion), JSON.stringify(data[i].mark), quesion_no,
+                    JSON.stringify(data[i].option[0]),
+                    JSON.stringify(data[i].option[1]),
+                    JSON.stringify(data[i].option[2]),
+                    JSON.stringify(data[i].option[3]),
+                    JSON.stringify(data[i].tittle),
+                    Quesion_Number,
+                    JSON.stringify(data[i].Ans),
+                    JSON.stringify(data[i].q_id)
+                );
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+
+</script>
+
+</html>

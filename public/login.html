@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #3498db, #8e44ad);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            width: 400px;
+            background: #2c3e50;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .card-header {
+            background: linear-gradient(to right, #3498db, #8e44ad);
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            padding: 20px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #8e44ad;
+            border-color: #8e44ad;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #641e5d;
+            border-color: #641e5d;
+        }
+
+        .toggle-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .toggle-btn button {
+            background-color: transparent;
+            color: #3498db;
+            border: none;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: blur(8px);
+        }
+
+        .brand-logo {
+            width: 40px;
+            margin-bottom: 10px;
+            transform: rotate(20deg);
+        }
+
+        .form-control {
+            background-color: #34495e;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .form-control:focus {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        #loginForm {
+            background-color: #2c3e50;
+            color: white;
+        }
+        #title{
+            margin-bottom: 30%;
+             margin-right: 20%;
+             font-family: cursive;
+             height: 30%;
+             width: 30%;
+             font-size: xx-large;
+        }
+    </style>
+</head>
+<body>
+<img src="your_image_url.jpg" alt="Background Image" class="background-image">
+<div class="card" id="loginSignupForm">
+    <img src="https://placekitten.com/400/150" alt="Brand Logo" class="brand-logo mx-auto d-block">
+    <div class="card-header" id="formTitle">
+        Welcome Back!
+    </div>
+    <div class="card-body" id="loginForm">
+        <form action="login" method="get">
+            <div class="form-group">
+                <label for="loginEmail">Email address</label>
+                <input type="email" name="useremail" class="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" name="pass" class="form-control" id="loginPassword" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+    </div>
+    <div class="card-body" id="signupForm" style="display: none;">
+        <form action="/user/signup" method="get">
+            <div class="form-group">
+                <label for="signupUsername">Username</label>
+                <input type="text" name='username' class="form-control" id="signupUsername" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="signupEmail">Email address</label>
+                <input type="email" name='useremail' class="form-control" id="signupEmail" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input type="password" name = 'pass' class="form-control" id="signupPassword" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+        </form>
+    </div>
+    <div class="toggle-btn">
+        <button id="toggleSignupBtn" onclick="toggleForm()">Don't have an account? Sign Up</button>
+    </div>
+</div>
+
+<script>
+    function toggleForm() {
+        var loginForm = document.getElementById('loginForm');
+        var signupForm = document.getElementById('signupForm');
+        var formTitle = document.getElementById('formTitle');
+        var loginSignupForm = document.getElementById('loginSignupForm');
+
+        if (loginForm.style.display === '' || loginForm.style.display === 'block') {
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+            formTitle.innerText = 'Join Us!';
+        } else {
+            loginForm.style.display = 'block';
+            signupForm.style.display = 'none';
+            formTitle.innerText = 'Welcome Back!';
+        }
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        /* Basic styling */
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e1f2f3;
+}
+
+#leaderboard {
+    margin: 20px auto;
+    width: 80%; 
+    max-width: 600px;
+    height: 100%; 
+    border-radius: 10px;
+    overflow-y: auto; 
+
+}
+
+#leaderboard h2 {
+    margin: 0;
+    padding: 20px;
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+}
+
+.player {
+    padding: 15px 20px; /* Reduced padding */
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;
+}
+
+.player:last-child {
+    border-bottom: none;
+}
+
+.player:hover {
+    background-color: #f58b85;
+}
+
+.rank {
+    flex: 0 0 60px; /* Reduced width */
+    font-size: 20px; /* Reduced font size */
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.name {
+    flex: 1;
+    font-size: 16px; /* Reduced font size */
+    color: #2c3e50;
+}
+
+.score {
+    flex: 0 0 120px; /* Reduced width */
+    text-align: center;
+    font-size: 20px; /* Reduced font size */
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+.add-player-form {
+    padding: 20px;
+    border-top: 2px solid #2c3e50;
+    background-color: #fff;
+}
+
+.add-player-form input[type="text"],
+.add-player-form input[type="number"],
+.add-player-form button {
+    display: block;
+    width: 100%;
+    padding: 10px; /* Reduced padding */
+    margin-bottom: 10px; /* Reduced margin */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Reduced font size */
+}
+
+.add-player-form button {
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-player-form button:hover {
+    background-color: #27ae60;
+}
+
+    </style>
+</head>
+<body>
+    <div id="leaderboard">
+        <h2>Leaderboard</h2>
+    </div>
+    <script>
+        function Leaderboard_Adding(rank, name, score) {
+            var _quiz = document.getElementById('leaderboard');
+            var data = document.createElement('div');
+            data.innerHTML = ` <div class="player">
+                                    <div class="rank">${rank}</div>
+                                    <div class="name">${name}</div>
+                                    <div class="score">${score}</div>
+                                </div>`
+            _quiz.appendChild(data);
+        }
+
+        window.onload = Leaderboard_Data;
+        function Leaderboard_Data() {
+            fetch('http://localhost:3000/LeaderBord_Data')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    for (let i = 0; i < data.length; i++) {
+                        Leaderboard_Adding(i + 1, data[i].Name, data[i].Test_no);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    // Handle error here if needed
+                });
+        }
+    </script>
+</body>
+</html>

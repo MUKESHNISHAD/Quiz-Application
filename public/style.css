@@ -1,0 +1,155 @@
+ body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    background-color: #98d2e6;
+}
+.list{
+    flex: 8;
+}
+#Title {
+    flex: 9;
+    padding: 5px;
+    font-size: xx-large;
+    width: 70%;
+    margin-right: 10px;
+}
+#Add {
+    cursor: pointer;
+    padding: 5px;
+    background-color: #2ecc71;
+    color: #fff;
+    font-size: x-large;
+    width: 10%;
+    border: none;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+#Navi {
+    background-color: hsl(198, 89%, 46%);  
+    color: #000000; 
+    padding: 10px 0;
+    font-size: large;
+    font-family: cursive;
+}
+
+.container {
+    width: 80%;  
+    margin: 0 auto; 
+}
+
+.navigation {
+    display: flex;  
+    justify-content: space-between;
+}
+
+.navigation-Tittle {
+    margin-right: 15px;  
+}
+
+.navigation-Link {
+    text-decoration: none;  
+    color: #ffffff; 
+    font-weight: bold;  
+}
+.navigation-Link:hover {
+    text-decoration: underline; 
+}
+.footer {
+    background-color: #ecf0f1;
+    padding: 10px;
+    display: flex;
+    flex: 1;
+}
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 24px;
+    flex: 1; 
+}
+
+.main {
+    margin: 20px;
+    overflow-y: auto;
+    flex: 8; 
+}
+
+.Quize {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Quize .Title {
+    flex: 1;
+}
+
+.Quize .Edit,
+.Quize .View,
+.Quize .Remove {
+    cursor: pointer;
+    padding: 5px;
+    background-color: #3498db;
+    color: #39f5e6;
+    margin-left: 5px;
+}
+
+.footer {
+    background-color: #ecf0f1;
+    padding: 10px;
+    display: flex;
+    flex: 1;
+}
+
+#Title {
+    flex: 9;
+    padding: 5px;
+    font-size: xx-large;
+    margin-right: 10px;
+}
+#Add {
+    flex: 1;
+    cursor: pointer;
+    padding: 5px;
+    background-color: #2ecc71;
+    color: #fff;
+    font-size: x-large;
+    border: none;
+}
+
+#Add:hover {
+    background-color: #27ae60;
+}
+.Quize{
+    background-color: #3498db;
+    border-radius: 13px 13px 13px 13px;
+}
+#link2,#link3{
+    margin-top: 0.6%;
+    margin-left: 1%;
+}
+#heading{
+    color: #000000;
+    font-size: larger;
+}

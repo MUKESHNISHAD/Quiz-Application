@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(41, 171, 169);
+           
+            background-repeat: repeat;
+            background-size:cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-image: url('images/L6.gif');
+            padding: 20px;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .QuesionWrapper {
+            border: 3px solid black;
+            padding: 5px;
+            margin-top: 10px;
+            transition-property: width;
+            transition-duration: 5s;
+            transition-timing-function: ease-in-out;
+        }
+
+        .QuesionWrapper:hover {
+            width: 110%;
+
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #Container {
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+
+        #Form {
+            height: 100%;
+            width: 65%;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .AddQuesion {
+            border-style: inherit;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #option-1,
+        #option-2 {
+            margin-top: 10px;
+            margin-left: 1%;
+            width: 36%;
+            border-radius: 10%;
+        }
+
+        #option-3,
+        #option-4 {
+            margin-top: 10px;
+            margin-left: 1%;
+            width: 36%;
+            border-radius: 10%;
+        }
+
+        .close {
+            float: right;
+            background-color: beige;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .button-holder{
+            float: right;
+            margin-top: 6px;
+        }
+        #Quize-Tittle-Heading{
+            font-size: xx-large;
+            font-family: cursive; 
+        }
+        input {
+            font-family: cursive, sans-serif;
+            font-stretch: narrower;
+        }
+    #tittle{
+        border-radius: 30px 6px 30px 6px;
+    } 
+    input{
+        border-radius: 20% 20% 0% 0%;
+        border-color: none;
+        color: rgb(46, 56, 233);
+        font-weight: bold;
+    }
+    </style>
+</head>
+
+<body>
+    <div>
+
+    </div>
+    <form action="/submitpage" method="post" id="Form">
+        <label for="Quiz-Title" id="Quize-Tittle-Heading"><b><center>Create Quiz </center></b></label><h3 id="q_id"></h3>
+        <input type="text" id="tittle" placeholder="Enter Quiz Here..." style="pointer-events: none;">
+        <div id="Container">
+            <!-- quiz Data -->
+        </div>
+        <div class="button-holder">
+            <button class="AddQuesion" type="button" onclick="AddQuesion()">Add New </button>
+            <button class="Submit" type="submit" onclick="Submit()">Submit</button>
+        </div>
+    </form>
+</body>
+<script src="index.js">
+
+</script>
+
+</html>
